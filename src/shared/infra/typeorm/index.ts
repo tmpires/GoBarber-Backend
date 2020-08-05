@@ -1,7 +1,7 @@
-import { createConnection, Connection } from 'typeorm';
+import { createConnections, Connection } from 'typeorm';
 
-const createDbConnection = async (): Promise<Connection> => {
-  const connection = await createConnection();
+const createDbConnection = async (): Promise<Connection[]> => {
+  const connection = await createConnections();
   // console.log(connection);
   return connection;
 };
