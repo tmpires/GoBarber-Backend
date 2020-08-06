@@ -1,17 +1,21 @@
 // import AppError from '@shared/errors/AppError';
 // import FakeUsersRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import FakeAppointmentsRepository from '@modules/appointments/repositories/fakes/FakeAppointmentsRepository';
+import FakeCacheProvider from '@shared/container/providers/CacheProvider/fakes/FakeCacheProvider';
 import ListProvidersAppointments from './ListProvidersAppointments';
 
 describe('ListMonthAvailability', () => {
   // let fakeUserRepository: FakeUsersRepository;
   let fakeAppointmentsRepository: FakeAppointmentsRepository;
   let listProvidersAppointments: ListProvidersAppointments;
+  let fakeCacheProvider: FakeCacheProvider;
   beforeEach(() => {
     // fakeUserRepository = new FakeUsersRepository();
     fakeAppointmentsRepository = new FakeAppointmentsRepository();
+    fakeCacheProvider = new FakeCacheProvider();
     listProvidersAppointments = new ListProvidersAppointments(
       fakeAppointmentsRepository,
+      fakeCacheProvider,
     );
   });
   it('should be able to list daily appointments of a provider', async () => {
