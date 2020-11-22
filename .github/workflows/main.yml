@@ -41,5 +41,18 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.SSH_PORT }}
           key: ${{ secrets.SSH_KEY }}
-          source: "."
+          source: ".,!node_modules"
           target: "~/app/GoBarber-Backend"
+
+      - name: Install dependencies on digital ocean, run database migrations and restart node server
+        uses: appleboy/ssh-action@v0.1.4
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          port: ${{ secrets.SSH_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd ~/app/GoBarber-Backend
+            yarn
+            ./node_modules/.bin/typeorm migration:run
+            pm2 restart gobarber-api
